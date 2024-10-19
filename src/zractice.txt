@@ -1,0 +1,337 @@
+AK--------------------------
+/
+function Header() {
+  const [defautName, setDefautName] = useState("");
+  const changeName = () => {
+    setDefautName(() => {
+      let names = ["Fundamental", "Essential", "crucial", "critical"];
+      const randomName = names[Math.ceil(Math.random() * 3)];
+      return `${randomName} ${defautName}`;
+    });
+  };
+
+  return (
+    <header>
+      <p>
+        <span>{defautName}</span> React concepts you will need for almost any
+        app you are going to build!
+      </p>
+    </header>
+  );
+}
+/
+
+UDEMY ---------------------------
+/
+const reactDescriptions = ["Fundamental", "Crucial", "Core"];
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * (max + 1));
+}
+
+function Header() {
+  const randomNames = reactDescriptions[getRandomInt(2)];
+  return (
+    <header>
+      <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
+      <h1>React Essentials</h1>
+      <p>
+        {randomNames} React concepts you will need for almost any app you are
+        going to build!
+      </p>
+    </header>
+  );
+}
+/
+
+
+
+SECTIOIN 49 TEST
+
+App.jsx
+%
+import Card from './Card';
+
+function App() {
+  return (
+    <div id="app">
+      <h1>Available Experts</h1>
+      <Card name="Anthony Blake">
+        <p>
+          Blake is a professor of Computer Science at the University of
+          Illinois.
+        </p>
+        <p>
+          <a href="mailto:blake@example.com">Email Anthony</a>
+        </p>
+      </Card>
+
+      <Card name="Maria Miles">
+        <p>
+          Maria is a professor of Computer Science at the University of
+          Illinois.
+        </p>
+        <p>
+          <a href="mailto:blake@example.com">Email Maria</a>
+        </p>
+      </Card>
+    </div>
+  );
+}
+
+export default App;
+%
+%
+export default function Card ({children, name}){
+    return(
+        <div class="card">
+            <h2>{name}</h2>
+            {children}
+        </div>
+        )
+}
+%
+%
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(#dfdee0, #c3c3c4);
+  color: #e5d9f1;
+  min-height: 100vh;
+}
+
+.card {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 30rem;
+  border-radius: 6px;
+  background: linear-gradient(#254041, #203031);
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #e5d9f1;
+}
+
+.card p {
+  margin: 0.5rem 0;
+}
+
+.card a {
+  color: #b3f4f6;
+  text-decoration: none;
+}
+%
+
+
+53. BUILDING WITH useState
+// IMPORTANT: You CAN'T import & use useState like this in this Udemy environment
+// import { useState } from 'react'
+// Instead, import & use it like this:
+// import React from 'react';
+// React.useState();
+import React from 'react';
+
+
+export default function App() {
+const [initialVal, setInitialVal] = React.useState("$100");
+const handleClick = () => {
+    setInitialVal("$75")
+}
+
+    return (
+        <div>
+            <p data-testid="price">{initialVal}</p>
+            <button onClick={handleClick}>Apply Discount</button>
+        </div>
+    );
+}
+
+
+CODING EXERCISE 10
+%
+import React from 'react';
+
+// IMPORTANT:
+// In this Udemy environment, you CAN'T import & use useState like this:
+// import { useState } from 'react'
+// Instead, import & use it like this:
+// import React from 'react';
+// React.useState(...)
+// don't change the Component name "App"
+export default function App() {
+    
+const [empty, setEmpty] = React.useState()
+const deletedContent = (
+    <div data-testid="alert" id="alert">
+        <h2>Are you sure?</h2>
+        <p>These changes can't be reverted!</p>
+        <button onClick={reDeleteClick} >Proceed</button>
+    </div>
+)
+// const deletedContent2 = (<button onClick={deleteClick}>Delete</button>)
+
+// function reDeleteClick(){
+//     setEmpty(deletedContent2)
+// }
+function deleteClick(){
+    setEmpty(deletedContent)
+}
+
+    return (
+      <div>
+        {!empty ? (<button onClick={deleteClick}>Delete</button>) : deletedContent }
+        // {empty ? deletedContent2 : 
+        //     deletedContent}
+        
+      </div>    
+    );
+}
+%
+
+
+%
+// SUCCEEDED STATE WITH CONDITOINAL RENDERING  //
+import React from 'react';
+
+// IMPORTANT:
+// In this Udemy environment, you CAN'T import & use useState like this:
+// import { useState } from 'react'
+// Instead, import & use it like this:
+// import React from 'react';
+// React.useState(...)
+
+// don't change the Component name "App"
+export default function App() {
+    const [content, setContent] = React.useState()
+    const tabContent = (<button onClick={handleClick}>Delete</button>)
+    const displayContent = (        <div data-testid="alert" id="alert">
+          <h2>Are you sure?</h2>
+          <p>These changes can't be reverted!</p>
+          <button onClick={handleClick1}>Proceed</button>
+        </div>)
+    function handleClick(){
+        setContent(displayContent)
+    }
+    function handleClick1(){
+        setContent()
+    }
+    return (
+      <div>
+        {!content ? tabContent : displayContent}
+        {content ? tabContent : null}
+      </div>    
+    );
+}
+%
+%
+MODIFIED//
+    import React from 'react';
+    
+    // IMPORTANT:
+    // In this Udemy environment, you CAN'T import & use useState like this:
+    // import { useState } from 'react'
+    // Instead, import & use it like this:
+    // import React from 'react';
+    // React.useState(...)
+    
+    // don't change the Component name "App"
+    export default function App() {
+        const [content, setContent] = React.useState()
+        const tabContent = (<button onClick={handleClick}>Delete</button>)
+        const displayContent = (        
+            <div data-testid="alert" id="alert">
+              <h2>Are you sure?</h2>
+              <p>These changes can't be reverted!</p>
+              <button onClick={handleClick1}>Proceed</button>
+            </div>
+        )
+        function handleClick(){
+            setContent(displayContent)
+        }
+        function handleClick1(){
+            setContent()
+        }
+        
+        return (
+          <div>
+            {!content ? tabContent : displayContent}
+            {content && null } 
+      </div>    
+    );
+}
+%
+
+%
+// Coding Exercise 12: Dynamic List Content
+App.js 
+\
+import React from 'react';
+
+import Todo from './Todo'
+
+// don't remove the export keyword here!
+export const DUMMY_TODOS = [
+    'Learn React',
+    'Practice React',
+    'Profit!'
+];
+
+// don't change the Component name "App"
+export default function App() {
+    return(
+        <ul>
+        {DUMMY_TODOS.map((items)=> <Todo text={items} />)}
+        </ul>
+    )
+}
+
+\
+
+\
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 3rem;
+    background-color: #2d2c2c;
+    color: #959090;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #8567fd;
+    color: white;
+    border: 2px solid #8567fd;
+    border-radius: 6px;
+}
+\
+
+\
+import React from 'react';
+
+export default function Todo({text}) {
+    return <li>{text}</li>;
+}
+\
+%
